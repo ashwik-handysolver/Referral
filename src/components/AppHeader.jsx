@@ -18,18 +18,18 @@ export default function AppHeader({ context }) {
           <span className="brand-name">Referrals</span>
         </div>
 
-        {context.referrerName ? (
-          {/* <div className="profile" title={context.referrerEmail || context.referrerName}>
+        {/* {context.referrerName ? (
+          <div className="profile" title={context.referrerEmail || context.referrerName}>
             {context.source && <span className="source-badge">from {context.source}</span>}
             <div className="profile-text">
               <span className="profile-name">{context.referrerName}</span>
               {context.referrerEmail && <span className="profile-sub">{context.referrerEmail}</span>}
             </div>
             <span className="avatar">{initials(context.referrerName)}</span>
-          </div> */}
+          </div>
         ) : (
           context.source && <span className="source-badge">from {context.source}</span>
-        )}
+        )} */}
       </div>
     </header>
   )
