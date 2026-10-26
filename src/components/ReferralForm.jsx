@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { submitReferral } from '../referralService'
 import { UserIcon, PhoneIcon, MailIcon, NoteIcon, SendIcon, CheckIcon, AlertIcon, PlusIcon, LockIcon } from './icons'
 
-const EMPTY_FORM = { fullName: '', phone: '', email: '', service: '', notes: '' }
-const SERVICES = ['CRM', 'HRMS', 'Invoicing', 'Opticals']
+const EMPTY_FORM = { fullName: '', phone: '', email: '', service: '', otherService: '', notes: '' }
+const OTHERS = 'Others'
+const SERVICES = ['CRM', 'HRMS', 'Invoicing', 'Opticals', OTHERS]
 const NOTES_MAX = 500
 const COIN_ANGLES = [0, 45, 90, 135, 180, 225, 270, 315]
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -25,6 +26,7 @@ function validate(form, referrerName, referrerEmail) {
   }
 
   if (!form.service) errors.service = 'Please pick a service.'
+  else if (form.service === OTHERS && !form.otherService.trim()) errors.otherService = 'Please tell us which service.'
   return errors
 }
 
@@ -45,6 +47,7 @@ export default function ReferralForm({ context, onSubmitted }) {
     return (e) => {
       setForm((f) => ({ ...f, [field]: e.target.value }))
       if (errors[field]) setErrors((errs) => ({ ...errs, [field]: undefined }))
+      if (field === 'service' && errors.otherService) setErrors((errs) => ({ ...errs, otherService: undefined }))
     }
   }
 
@@ -62,7 +65,7 @@ export default function ReferralForm({ context, onSubmitted }) {
       fullName: form.fullName.trim(),
       phone: form.phone.trim(),
       email: form.email.trim(),
-      service: form.service,
+      service: form.service === OTHERS ? `Other: ${form.otherService.trim()}` : form.service,
       notes: form.notes.trim(),
     }
     try {
@@ -214,8 +217,21 @@ export default function ReferralForm({ context, onSubmitted }) {
               {s}
             </label>
           ))}
+          {form.service === OTHERS && (
+            <input
+              id="otherService"
+              className={`other-input${errors.otherService ? ' invalid' : ''}`}
+              placeholder="Which service?"
+              aria-label="Other service"
+              maxLength={60}
+              autoComplete="off"
+              autoFocus
+              value={form.otherService}
+              onChange={update('otherService')}
+            />
+          )}
         </div>
-        {errors.service && <small className="error">{errors.service}</small>}
+        {(errors.service || errors.otherService) && <small className="error">{errors.service || errors.otherService}</small>}
       </fieldset>
 
       <fieldset className="group">
@@ -238,7 +254,7 @@ export default function ReferralForm({ context, onSubmitted }) {
 
       <div className="form-footer">
         {/* Shown in the glossy theme only (hidden on the normal page in App.css). */}
-        <p className="fine-print">We’ll only use these details to contact them about this referral.</p>
+        {/* <p className="fine-print">We’ll only use these details to contact them about this referral.</p> */}
         <button type="submit" className="btn primary" disabled={status === 'submitting'}>
           {status === 'submitting' ? <span className="spinner" aria-hidden="true" /> : <SendIcon size={18} />}
           {status === 'submitting' ? 'Sending…' : 'Submit referral'}
