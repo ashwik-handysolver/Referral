@@ -15,7 +15,12 @@ export default function AppHeader({ context }) {
       <div className="topbar-inner">
         <div className="brand">
           <span className="brand-mark"><HeartHandIcon size={18} /></span>
-          <span className="brand-name">Referrals</span>
+          <span className="brand-name">
+            <span className="wordmark" aria-label="handysolver">
+              <span className="wordmark-handy">Handy</span><span className="wordmark-solver">solver</span>
+            </span>
+            <span className="brand-sub">Referral Program</span>
+          </span>
         </div>
 
         {/* {context.referrerName ? (
