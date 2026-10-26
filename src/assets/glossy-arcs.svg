@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice">
+  <!-- Glowing light arcs for the glossy theme, traced from the reference design.
+       Each arc = a wide blurred glow + a thin bright core, faded at both ends. -->
+  <defs>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter>
+    <filter id="wide" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+
+    <linearGradient id="gTL" gradientUnits="userSpaceOnUse" x1="0" y1="260" x2="260" y2="20">
+      <stop offset="0" stop-color="#ffd09f" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#ffd09f" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="gTL2" gradientUnits="userSpaceOnUse" x1="0" y1="170" x2="200" y2="0">
+      <stop offset="0" stop-color="#ffd09f" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffe6cf" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#ffd09f" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gBL" gradientUnits="userSpaceOnUse" x1="0" y1="800" x2="460" y2="700">
+      <stop offset="0" stop-color="#ffd09f" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ffd09f" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gTR" gradientUnits="userSpaceOnUse" x1="1420" y1="280" x2="1672" y2="30">
+      <stop offset="0" stop-color="#ffd09f" stop-opacity="0"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ffd09f" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="gTR2" gradientUnits="userSpaceOnUse" x1="1360" y1="230" x2="1640" y2="0">
+      <stop offset="0" stop-color="#ffd09f" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffe6cf" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ffd09f" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gBR" gradientUnits="userSpaceOnUse" x1="1440" y1="900" x2="1672" y2="540">
+      <stop offset="0" stop-color="#ffd09f" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#ffd09f" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="gBR2" gradientUnits="userSpaceOnUse" x1="1280" y1="941" x2="1672" y2="640">
+      <stop offset="0" stop-color="#ffd09f" stop-opacity="0"/>
+      <stop offset="0.6" stop-color="#ffe6cf" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffd09f" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="spot">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="0.35" stop-color="#ffe0bf" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffb87f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floor">
+      <stop offset="0" stop-color="#ffddc9" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffa87f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Soft light pooling along the bottom edge -->
+  <ellipse cx="700" cy="960" rx="620" ry="120" fill="url(#floor)" filter="url(#wide)"/>
+
+  <!-- Top-left arcs -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M -10 268 Q 60 95 262 18" stroke="url(#gTL)" stroke-width="22" opacity="0.8" filter="url(#soft)"/>
+    <path d="M -10 268 Q 60 95 262 18" stroke="url(#gTL)" stroke-width="3"/>
+    <path d="M -10 178 Q 50 62 200 -4" stroke="url(#gTL2)" stroke-width="1.5"/>
+  </g>
+  <circle cx="125" cy="170" r="70" fill="url(#spot)" opacity="0.55"/>
+
+  <!-- Bottom-left sweep -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M -20 820 C 70 700 210 655 470 700" stroke="url(#gBL)" stroke-width="24" opacity="0.75" filter="url(#soft)"/>
+    <path d="M -20 820 C 70 700 210 655 470 700" stroke="url(#gBL)" stroke-width="3"/>
+  </g>
+  <circle cx="230" cy="672" r="80" fill="url(#spot)" opacity="0.45"/>
+
+  <!-- Top-right arcs -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M 1418 285 Q 1500 100 1690 28" stroke="url(#gTR)" stroke-width="22" opacity="0.8" filter="url(#soft)"/>
+    <path d="M 1418 285 Q 1500 100 1690 28" stroke="url(#gTR)" stroke-width="3"/>
+    <path d="M 1355 235 Q 1450 60 1650 -6" stroke="url(#gTR2)" stroke-width="1.5"/>
+  </g>
+  <circle cx="1500" cy="150" r="80" fill="url(#spot)" opacity="0.4"/>
+
+  <!-- Bottom-right arcs -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M 1430 905 Q 1560 700 1690 545" stroke="url(#gBR)" stroke-width="26" opacity="0.8" filter="url(#soft)"/>
+    <path d="M 1430 905 Q 1560 700 1690 545" stroke="url(#gBR)" stroke-width="3"/>
+    <path d="M 1270 950 Q 1500 780 1690 640" stroke="url(#gBR2)" stroke-width="1.5"/>
+  </g>
+  <circle cx="1580" cy="690" r="90" fill="url(#spot)" opacity="0.5"/>
+</svg>

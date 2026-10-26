@@ -1,0 +1,1217 @@
+/* Glossy theme (orange glass) — the app's main look, layered over App.css.
+   Deep orange backdrop with light arcs, a translucent glass form card with white text,
+   crisp white inputs, frosted white sidebar cards and a glossy orange CTA.
+   The look is the same in light and dark mode, so colors are set explicitly here. */
+
+/* ---------- Theme tokens (override light/dark vars inside the glossy page) ---------- */
+.app.glossy {
+  --text: #722b09;
+  --muted: #96644a;
+  --faint: #b48870;
+  --border: rgb(114 43 9 / 0.1);
+  --accent: #ff5914;
+  --accent-soft: #ffefe3;
+  --accent-ink: #ee6017;
+  --success: #16a34a;
+  --success-soft: #dcfce7;
+  --warn: #b45309;
+  --warn-soft: #fef3e2;
+  --surface: #ffffff;
+  --surface-2: #fff4ee;
+
+  --field-bg: linear-gradient(180deg, #ffffff 0%, #fff8f4 100%);
+  --field-bg-focus: #ffffff;
+  --field-border: rgb(255 207 183 / 0.9);
+  --field-border-hover: #ffbc9c;
+  --field-focus: #ffa86a;
+
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  color: #fffbf8;
+  /* Glowing light arcs (SVG, traced from the reference) over a royal-blue gradient */
+  background:
+    url('./assets/glossy-arcs.svg') center / cover no-repeat,
+    radial-gradient(ellipse 55% 60% at 80% 22%, rgb(255 132 56 / 0.85) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 45% at 45% 100%, rgb(255 120 70 / 0.55) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 55% at 8% 55%, rgb(255 90 30 / 0.45) 0%, transparent 70%),
+    linear-gradient(135deg, #781f0a 0%, #c84013 38%, #ec551a 62%, #9a2c0c 88%, #6e2008 100%);
+}
+
+/* ---------- Top bar: just the brand on the backdrop ---------- */
+.app.glossy .topbar {
+  position: relative;
+  background: transparent;
+  border-bottom: 0;
+  color: #fffbf8;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.app.glossy .topbar-inner { padding-top: 16px; padding-bottom: 4px; }
+.app.glossy .brand { font-weight: 600; font-size: 1.05rem; letter-spacing: 0.01em; }
+.app.glossy .brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  color: #fff;
+  background: linear-gradient(145deg, #ff8b3d, #ff5914);
+  border: 1px solid rgb(255 255 255 / 0.4);
+  box-shadow: 0 4px 18px rgb(0 0 0 / 0.15), inset 0 1px 0 rgb(255 255 255 / 0.55);
+}
+.app.glossy .source-badge { background: rgb(255 255 255 / 0.16); }
+.app.glossy .avatar { color: #ff5914; }
+
+/* ---------- Hero ---------- */
+.app.glossy .hero { color: #fff; }
+.app.glossy .hero h1 {
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #fff;
+}
+.app.glossy .hero h1 span { color: #ffba83; }
+.app.glossy .hero p { color: #ffd9c5; opacity: 1; font-size: 1rem; }
+
+/* ---------- Shared card shape ---------- */
+.app.glossy .panel {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: 22px;
+}
+
+/* ---------- Form card: translucent blue glass ---------- */
+.app.glossy .form-panel {
+  padding: 24px 30px;
+  color: #fff;
+  /* Pale frosted glass: blue at the top, brightening to lavender-white at the bottom */
+  background:
+    radial-gradient(ellipse 70% 45% at 88% 0%, rgb(255 255 255 / 0.3), transparent 70%),
+    radial-gradient(ellipse 80% 55% at 20% 100%, rgb(255 255 255 / 0.42), transparent 70%),
+    linear-gradient(180deg, rgb(255 195 165 / 0.4) 0%, rgb(255 205 182 / 0.47) 50%, rgb(255 230 222 / 0.68) 100%);
+  border: 1.5px solid rgb(255 255 255 / 0.78);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  backdrop-filter: blur(28px) saturate(150%);
+  /* Glowing white rim + deep drop shadow */
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.12),
+    0 0 26px rgb(255 210 175 / 0.5),
+    0 28px 70px rgb(70 15 0 / 0.3),
+    inset 0 1px 0 #fff,
+    inset 0 0 28px rgb(255 255 255 / 0.2);
+}
+/* Bright reflection along the top edge */
+.app.glossy .form-panel::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 8%;
+  width: 84%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff 20%, #ffd9b4 50%, #fff 80%, transparent);
+  opacity: 0.9;
+}
+/* Soft light in the top-right corner */
+.app.glossy .form-panel::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 260px;
+  height: 200px;
+  top: -120px;
+  right: -80px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.24);
+  filter: blur(55px);
+  pointer-events: none;
+}
+
+.app.glossy .form-panel .panel-title { color: #fff; font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em; }
+.app.glossy .form-panel .panel-meta { color: rgb(255 246 239 / 0.85); }
+.app.glossy .form-panel .req { color: #ffc4c4; }
+
+.app.glossy .form-panel .group { border-top: 0; padding-top: 10px; }
+.app.glossy .form-panel .group legend { color: #ffeadc; letter-spacing: 0.09em; font-weight: 650; }
+.app.glossy .form-panel .field label { color: #fff; font-weight: 550; }
+.app.glossy .form-panel .opt { color: #ffe1d0; font-weight: 400; font-size: 0.85rem; }
+.app.glossy .form-panel .hint { color: #ffdcc9; }
+.app.glossy .form-panel .error { color: #ffd0d0; }
+.app.glossy .form-panel .char-count { color: #ffe6d7; }
+.app.glossy .form-panel .form-footer { border-top: 0; padding-top: 6px; }
+.app.glossy .form-panel .fine-print { color: #ffdcc9; }
+
+/* Inputs: white with a subtle gloss */
+.app.glossy .control input,
+.app.glossy .control textarea {
+  color: #7d3a17;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgb(125 49 12 / 0.08), inset 0 1px 0 #fff;
+}
+.app.glossy .control input::placeholder,
+.app.glossy .control textarea::placeholder { color: #c49980; }
+.app.glossy .control-icon { color: #ed7537; }
+.app.glossy .control input:focus,
+.app.glossy .control textarea:focus {
+  border-color: #ffc48e;
+  box-shadow: 0 0 0 4px rgb(255 175 115 / 0.3), 0 5px 16px rgb(177 65 16 / 0.12);
+}
+.app.glossy .control:focus-within .control-icon { color: #ff5914; }
+.app.glossy .has-error .control input,
+.app.glossy .has-error .control textarea { border-color: #ff8f9f; }
+.app.glossy .has-error .control input:focus,
+.app.glossy .has-error .control textarea:focus { border-color: #ff8f9f; box-shadow: 0 0 0 4px rgb(255 143 159 / 0.3); }
+.app.glossy .has-error .control-icon,
+.app.glossy .has-error .control:focus-within .control-icon { color: #e5484d; }
+.app.glossy .control input[readonly] { background: #fff4ee; color: #96644a; }
+.app.glossy .error-banner { background: rgb(255 208 208 / 0.18); color: #ffe1e1; }
+
+/* ---------- Glossy blue CTA ---------- */
+.app.glossy .btn { transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease; }
+.app.glossy .btn.primary {
+  position: relative;
+  overflow: clip;
+  min-height: 50px;
+  padding: 0 26px;
+  gap: 10px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #ff7728 0%, #f85107 50%, #d83907 100%);
+  border: 1px solid rgb(255 255 255 / 0.38);
+  box-shadow:
+    0 8px 22px rgb(220 57 0 / 0.32),
+    0 0 18px rgb(255 147 68 / 0.25),
+    inset 0 1px 0 rgb(255 255 255 / 0.55);
+}
+/* Reflection that slides across on hover */
+.app.glossy .btn.primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(110deg, transparent, rgb(255 255 255 / 0.28), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+.app.glossy .btn.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  background: linear-gradient(135deg, #ff7728 0%, #f85107 50%, #d83907 100%);
+  box-shadow:
+    0 12px 30px rgb(220 57 0 / 0.4),
+    0 0 24px rgb(255 147 68 / 0.35),
+    inset 0 1px 0 rgb(255 255 255 / 0.6);
+}
+.app.glossy .btn.primary:hover:not(:disabled)::before { left: 140%; }
+.app.glossy .btn.primary:active:not(:disabled) { transform: translateY(0) scale(0.985); }
+.app.glossy .btn.primary:focus-visible { outline: 3px solid #fff; outline-offset: 4px; box-shadow: none; }
+.app.glossy .btn.primary:disabled { opacity: 0.8; cursor: progress; }
+
+.app.glossy .btn.ghost {
+  color: #fff;
+  border-radius: 13px;
+  background: rgb(255 255 255 / 0.14);
+  border: 1px solid rgb(255 255 255 / 0.45);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5);
+}
+.app.glossy .btn.ghost:hover { background: rgb(255 255 255 / 0.22); }
+
+@media (prefers-reduced-motion: reduce) {
+  .app.glossy .btn, .app.glossy .btn.primary::before { transition: none; }
+  .app.glossy .btn.primary:hover:not(:disabled) { transform: none; }
+}
+
+/* Success screen sits on the blue glass too */
+.app.glossy .success h2 { color: #fff; }
+.app.glossy .success p { color: #ffe6d7; }
+
+/* ---------- Sidebar: light-blue frosted glass cards ---------- */
+.app.glossy .sidebar .panel {
+  padding: 20px 24px;
+  color: #722b09;
+  /* Near-white at the top-left, letting the blue show through toward the bottom-right */
+  background:
+    radial-gradient(ellipse 90% 60% at 0% 0%, rgb(255 255 255 / 0.55), transparent 70%),
+    linear-gradient(160deg, rgb(255 248 244 / 0.84) 0%, rgb(255 234 222 / 0.74) 50%, rgb(255 208 186 / 0.66) 100%);
+  border: 1.5px solid rgb(255 255 255 / 0.85);
+  -webkit-backdrop-filter: blur(26px) saturate(150%);
+  backdrop-filter: blur(26px) saturate(150%);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.12),
+    0 0 24px rgb(255 210 175 / 0.45),
+    0 18px 42px rgb(70 15 0 / 0.2),
+    inset 0 1px 0 #fff,
+    inset 0 0 24px rgb(255 255 255 / 0.25);
+}
+
+/* Sidebar matches the form's height; "Your referrals" takes the rest */
+@media (min-width: 901px) {
+  .app.glossy .sidebar { align-self: stretch; gap: 18px; }
+  .app.glossy .sidebar .recent { flex: 1; display: flex; flex-direction: column; }
+  .app.glossy .sidebar .recent .empty,
+  .app.glossy .sidebar .recent .recent-list { flex: 1; }
+  .app.glossy .sidebar .recent .empty { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+}
+.app.glossy .sidebar .panel-title { color: #722b09; font-size: 1.12rem; font-weight: 800; letter-spacing: -0.02em; }
+.app.glossy .sidebar .panel-head { margin-bottom: 10px; }
+.app.glossy .how .panel-title { margin-bottom: 14px; }
+
+/* Sparkle in the top-right corner of each sidebar card */
+.app.glossy .sidebar .panel::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  filter: drop-shadow(0 0 6px rgb(255 180 120 / 0.9));
+  pointer-events: none;
+}
+.app.glossy .sidebar .recent::after { width: 8px; height: 8px; }
+
+/* ---------- How it works: timeline ---------- */
+.app.glossy .steps { gap: 16px; }
+.app.glossy .step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+/* Line connecting the step icons */
+.app.glossy .step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 52px;
+  left: 25px;
+  width: 2px;
+  height: calc(100% - 36px);
+  background: linear-gradient(180deg, rgb(255 129 70 / 0.4), rgb(255 129 70 / 0.1));
+}
+.app.glossy .step-icon {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: #ee6017;
+  background: linear-gradient(145deg, #fff2e6, #ffdfc3);
+  border: 1px solid rgb(255 255 255 / 0.9);
+  box-shadow: 0 5px 16px rgb(223 107 45 / 0.14), inset 0 1px 0 #fff;
+}
+.app.glossy .step-icon svg { width: 22px; height: 22px; }
+.app.glossy .step:nth-child(2) .step-icon { color: #c2570c; background: linear-gradient(145deg, #fff4dc, #fde0a6); }
+.app.glossy .step:nth-child(3) .step-icon { color: #12a150; background: linear-gradient(145deg, #e3fbee, #b9f0d2); }
+
+.app.glossy .step > div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 10px;
+  align-items: center;
+  padding-top: 2px;
+}
+.app.glossy .step-num {
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #722b09;
+  background: #fff;
+  box-shadow: 0 1px 4px rgb(114 43 9 / 0.12);
+}
+.app.glossy .step-word {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: clip;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.app.glossy .step strong { grid-row: 1; color: #722b09; font-size: 0.95rem; }
+.app.glossy .step p { grid-column: 2; color: #96644a; font-size: 0.85rem; margin-top: 2px; }
+
+/* ---------- Your referrals ---------- */
+.app.glossy .empty { color: #722b09; padding-top: 4px; }
+.app.glossy .empty-icon {
+  width: 52px;
+  height: 52px;
+  background: transparent;
+  color: #ff6b1f;
+}
+.app.glossy .empty-icon svg { width: 40px; height: 40px; stroke-width: 2.2; }
+.app.glossy .empty p { color: #8a4124; font-size: 0.92rem; }
+.app.glossy .count { background: #ffefe3; color: #ff5914; }
+.app.glossy .recent-item { border-color: rgb(114 43 9 / 0.08); }
+.app.glossy .avatar.sm { background: #ffefe3; color: #ff5914; }
+
+/* ---------- Desktop layout and sizing, matched to the reference design ----------
+   Measured at 1672x901: content 1164px wide, form card 732px + sidebar 410px,
+   cards end about 56px above the bottom. Header sizes scale with window height
+   so shorter laptop screens still fit without scrolling. */
+.app.glossy .form-panel .hint { display: none; }
+
+@media (min-width: 901px) {
+  .app.glossy .topbar-inner,
+  .app.glossy .content { max-width: 1204px; }
+
+  .app.glossy .topbar-inner { padding-top: clamp(10px, 2.6vh, 28px); }
+  .app.glossy .brand { font-size: 1.25rem; font-weight: 500; gap: 14px; }
+  .app.glossy .brand-mark { width: 38px; height: 38px; }
+
+  .app.glossy .content { padding-top: clamp(6px, 3vh, 40px); padding-bottom: clamp(12px, 5.6vh, 56px); }
+  .app.glossy .hero { margin-bottom: clamp(10px, 2.2vh, 34px); }
+  .app.glossy .hero h1 { font-size: clamp(1.6rem, 4.4vh, 2.9rem); }
+  .app.glossy .hero p { font-size: clamp(1rem, 2.1vh, 1.2rem); margin-top: 4px; }
+
+  .app.glossy .layout {
+    grid-template-columns: minmax(0, 1.78fr) minmax(300px, 1fr);
+    gap: 22px;
+  }
+
+  /* Form card */
+  .app.glossy .form-panel { padding: clamp(16px, 2.6vh, 36px) 38px clamp(16px, 2.4vh, 32px); }
+  .app.glossy .form-panel .panel-head { margin-bottom: clamp(10px, 2vh, 18px); }
+  .app.glossy .form-panel .panel-title { font-size: clamp(1.45rem, 3.4vh, 1.75rem); }
+  .app.glossy .form-panel .panel-meta { font-size: 0.9rem; }
+  .app.glossy .form-panel .row { column-gap: 22px; }
+  .app.glossy .form-panel .group { padding-top: clamp(4px, 1vh, 14px); }
+  .app.glossy .form-panel .group legend { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; margin-bottom: clamp(5px, 1vh, 10px); }
+  /* One "Your details" heading over both fields, as in the reference: the second
+     heading keeps its space so the fields stay aligned, but isn't shown. */
+  .app.glossy .group-pair .group + .group legend { color: transparent; }
+  .app.glossy .form-panel .field { gap: clamp(5px, 0.9vh, 8px); margin-bottom: clamp(8px, 1.3vh, 12px); }
+  .app.glossy .form-panel .field label { font-size: 1.05rem; font-weight: 500; }
+  .app.glossy .form-panel .opt { font-size: 1rem; }
+  .app.glossy .control input,
+  .app.glossy .control textarea { padding-top: clamp(10px, 1.5vh, 14px); padding-bottom: clamp(10px, 1.5vh, 14px); padding-left: 46px; border-radius: 11px; }
+  .app.glossy .form-panel > .group:last-of-type textarea { min-height: 56px; }
+  /* Notes may shrink to its minimum, never below it (so it can't overlap the footer) */
+  .app.glossy .form-panel > .group:last-of-type,
+  .app.glossy .form-panel > .group:last-of-type .field,
+  .app.glossy .form-panel > .group:last-of-type .control { min-height: auto; }
+  .app.glossy .control-icon { left: 15px; top: clamp(11px, 1.6vh, 15px); }
+  .app.glossy .form-panel .form-footer { padding-top: clamp(4px, 0.8vh, 8px); margin-top: 0; }
+  .app.glossy .form-panel .fine-print { font-size: 0.9rem; line-height: 1.6; max-width: 320px; color: #c4633d; }
+  .app.glossy .btn.primary { min-height: clamp(46px, 6vh, 56px); padding: 0 30px; font-size: 1.08rem; border-radius: 12px; }
+
+  /* Sidebar cards */
+  .app.glossy .sidebar { --step-size: clamp(44px, 6vh, 56px); }
+  .app.glossy .sidebar .panel { padding: 26px 28px; }
+  .app.glossy .sidebar .panel-title { font-size: 1.32rem; }
+  .app.glossy .how .panel-title { margin-bottom: clamp(10px, 2vh, 22px); }
+  .app.glossy .steps { gap: 22px; }
+  .app.glossy .step { grid-template-columns: var(--step-size) minmax(0, 1fr); gap: 16px; }
+  .app.glossy .step-icon { width: var(--step-size); height: var(--step-size); }
+  .app.glossy .step:not(:last-child)::after { top: var(--step-size); left: calc(var(--step-size) / 2 - 1px); }
+  .app.glossy .step-num { width: 26px; height: 26px; font-size: 0.85rem; }
+  .app.glossy .step strong { font-size: 1.05rem; }
+  .app.glossy .step p { font-size: 0.95rem; line-height: 1.45; }
+  .app.glossy .empty-icon { width: clamp(44px, 6.8vh, 64px); height: clamp(44px, 6.8vh, 64px); margin-bottom: 6px; }
+  .app.glossy .empty-icon svg { width: clamp(32px, 5vh, 48px); height: clamp(32px, 5vh, 48px); }
+  .app.glossy .empty p { font-size: 1rem; }
+}
+
+/* Short laptop screens: tighter form spacing so error messages still fit without scrolling */
+@media (min-width: 901px) and (max-height: 820px) {
+  .app.glossy .form-panel { padding-top: 14px; padding-bottom: 14px; }
+  .app.glossy .form-panel .panel-head { margin-bottom: 6px; }
+  .app.glossy .form-panel .group { padding-top: 2px; }
+  .app.glossy .form-panel .group legend { margin-bottom: 4px; }
+  .app.glossy .form-panel .field { margin-bottom: 6px; }
+  .app.glossy .form-panel .error { font-size: 0.78rem; line-height: 1.3; }
+  .app.glossy .form-panel > .group:last-of-type textarea { min-height: 46px; }
+  .app.glossy .content { padding-top: 6px; padding-bottom: 14px; }
+  .app.glossy .sidebar .panel { padding: 16px 28px; }
+  .app.glossy .steps { gap: 10px; }
+}
+
+/* ==========================================
+   Glossy card refinement (supplied CSS, mapped to this app's classes)
+   referral-form-card -> .form-panel, referral-side-card -> .sidebar .panel,
+   referral-input-wrap / referral-textarea -> inputs, referral-submit -> .btn.primary
+========================================== */
+
+/* Main form: frosted blue-white glass */
+.app.glossy .form-panel {
+  background:
+    radial-gradient(ellipse at 78% 90%, rgb(255 255 255 / 0.65), transparent 55%),
+    linear-gradient(135deg, rgb(255 249 245 / 0.48) 0%, rgb(255 232 218 / 0.38) 48%, rgb(255 247 240 / 0.56) 100%);
+  -webkit-backdrop-filter: blur(32px) saturate(125%);
+  backdrop-filter: blur(32px) saturate(125%);
+  transition: box-shadow 250ms ease, border-color 250ms ease;
+
+  /* Glossy border (supplied CSS) */
+  border: 1px solid rgb(255 255 255 / 0.85);
+  border-radius: 22px;
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.12),
+    0 0 18px rgb(255 255 255 / 0.18),
+    0 12px 35px rgb(130 50 15 / 0.16),
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    inset 1px 0 0 rgb(255 255 255 / 0.35),
+    inset -1px 0 0 rgb(255 255 255 / 0.25);
+}
+
+/* Bright reflective line along the top */
+.app.glossy .form-panel::before {
+  z-index: 2;
+  top: 0;
+  left: 8%;
+  width: 84%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 1), transparent);
+  box-shadow: 0 0 8px rgb(255 255 255 / 0.8);
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Lighter, more opaque sidebar cards */
+.app.glossy .sidebar .panel {
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.84) 0%, rgb(255 250 247 / 0.76) 55%, rgb(255 239 229 / 0.8) 100%);
+  /* Border measured from the reference: a 2px pale-blue rim with a faint dark hairline outside */
+  border: 2px solid rgb(255 234 205 / 0.95);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(26px) saturate(120%);
+  backdrop-filter: blur(26px) saturate(120%);
+  box-shadow:
+    0 0 0 1px rgb(120 28 0 / 0.32),
+    0 14px 35px rgb(110 43 12 / 0.14),
+    inset 0 0 6px rgb(255 255 255 / 0.35);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+/* Subtle sidebar reflection */
+.app.glossy .sidebar .panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: #fff;
+  box-shadow: 0 0 8px rgb(255 255 255 / 0.65);
+  pointer-events: none;
+}
+
+/* Softer hover, not an exaggerated floating effect */
+.app.glossy .sidebar .panel:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgb(120 28 0 / 0.32),
+    0 18px 40px rgb(110 43 12 / 0.18),
+    inset 0 0 6px rgb(255 255 255 / 0.35);
+}
+@media (prefers-reduced-motion: reduce) {
+  .app.glossy .sidebar .panel:hover { transform: none; }
+}
+
+/* Keep sidebar typography crisp */
+.app.glossy .sidebar .panel-title,
+.app.glossy .step strong { color: #532610; }
+.app.glossy .step p,
+.app.glossy .empty p { color: #996b52; }
+
+/* Keep form inputs bright against the glass */
+.app.glossy {
+  --field-bg: linear-gradient(180deg, rgb(255 255 255 / 0.98), rgb(255 250 247 / 0.94));
+  --field-border: rgb(250 211 192 / 0.85);
+}
+.app.glossy .control input,
+.app.glossy .control textarea {
+  box-shadow: 0 2px 7px rgb(133 63 24 / 0.05), inset 0 1px 0 #fff;
+}
+
+/* The lighter glass makes the white counter hard to read on the right; use the note's blue */
+@media (min-width: 901px) {
+  .app.glossy .form-panel .char-count { color: #c4633d; font-weight: 600; }
+}
+
+/* Reduce excess glow from the existing CTA */
+.app.glossy .btn.primary {
+  box-shadow: 0 7px 18px rgb(220 74 20 / 0.25), inset 0 1px 0 rgb(255 255 255 / 0.55);
+}
+
+/* ---------- Shining border: one lap of light around a field when it's selected ----------
+   A round glow travels along the edge (its centre moves along the border via
+   --shine-x / --shine-y) and a mask keeps only a thin ring over the border.
+   Because the glow is a circle, it simply curves around the corners. */
+@property --shine-x { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --shine-y { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+.app.glossy .control {
+  --shine-core: #ffffff;
+  --shine-mid: #ffa85a;
+  --shine-edge: rgb(255 107 31 / 0.55);
+  --shine-glow: rgb(255 160 90 / 0.95);
+}
+.app.glossy .has-error .control {
+  --shine-mid: #ff8f9f;
+  --shine-edge: rgb(229 72 77 / 0.55);
+  --shine-glow: rgb(255 140 160 / 0.95);
+}
+.app.glossy .control::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  padding: 2.5px;
+  background: radial-gradient(
+    circle 44px at var(--shine-x) var(--shine-y),
+    var(--shine-core) 0%,
+    var(--shine-mid) 30%,
+    var(--shine-edge) 60%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  filter: drop-shadow(0 0 5px var(--shine-glow));
+  opacity: 0;
+  pointer-events: none;
+}
+/* One slow lap at a constant speed, then the light fades out.
+   Movement and fading are separate animations: movement is linear so the light
+   doesn't speed up and slow down at every corner; the fade eases in and out. */
+.app.glossy .control:focus-within::after {
+  animation:
+    field-shine-move 3s linear 1 forwards,
+    field-shine-fade 3s ease-in-out 1 forwards;
+}
+/* Percentages along the way match a typical field's shape (about 6:1),
+   so the light moves at the same speed on every edge. */
+@keyframes field-shine-move {
+  0%    { --shine-x: 0%;   --shine-y: 0%; }
+  42.5% { --shine-x: 100%; --shine-y: 0%; }
+  50%   { --shine-x: 100%; --shine-y: 100%; }
+  92.5% { --shine-x: 0%;   --shine-y: 100%; }
+  100%  { --shine-x: 0%;   --shine-y: 0%; }
+}
+@keyframes field-shine-fade {
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+/* Taller Notes box: give the side edges a fairer share of the lap */
+.app.glossy .form-panel > .group:last-of-type .control:focus-within::after {
+  animation-name: field-shine-move-tall, field-shine-fade;
+}
+@keyframes field-shine-move-tall {
+  0%   { --shine-x: 0%;   --shine-y: 0%; }
+  37%  { --shine-x: 100%; --shine-y: 0%; }
+  50%  { --shine-x: 100%; --shine-y: 100%; }
+  87%  { --shine-x: 0%;   --shine-y: 100%; }
+  100% { --shine-x: 0%;   --shine-y: 0%; }
+}
+/* The auto-filled email can't be edited, so it doesn't shine */
+.app.glossy .control:has(input[readonly])::after { display: none; }
+@media (min-width: 901px) {
+  .app.glossy .control::after { border-radius: 12px; }
+}
+/* Reduced motion: no moving light */
+@media (prefers-reduced-motion: reduce) {
+  .app.glossy .control:focus-within::after { animation: none; }
+}
+
+/* ==========================================================================
+   BRIGHT + ORANGE
+   Airy cream-white backdrop with soft peach glows and light arcs; white
+   frosted-glass cards (blur, rims and shine lines kept) with dark warm text;
+   orange for accents.
+   ========================================================================== */
+.app.glossy {
+  --text: #2a1a10;
+  --muted: #7a6455;
+  --faint: #a08a7a;
+  --border: rgb(120 70 30 / 0.1);
+  --accent: #f26a1b;
+  --accent-soft: #fff1e6;
+  --accent-ink: #e05f12;
+  --surface: #ffffff;
+  --surface-2: #fff8f2;
+
+  /* Clean white inputs with an orange focus */
+  --field-bg: rgb(255 255 255 / 0.92);
+  --field-bg-focus: #ffffff;
+  --field-border: #f0dccd;
+  --field-border-hover: #e6c4aa;
+  --field-focus: #ff8a3d;
+
+  color: #2a1a10;
+  background:
+    url('./assets/glossy-arcs.svg') center / cover no-repeat,
+    radial-gradient(ellipse 55% 55% at 85% 8%, rgb(255 168 100 / 0.42) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 50% at 0% 70%, rgb(255 196 150 / 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 40% at 50% 105%, rgb(255 210 175 / 0.55) 0%, transparent 70%),
+    linear-gradient(160deg, #fffbf7 0%, #fff4ea 45%, #ffeadb 100%);
+}
+
+/* Header */
+.app.glossy .topbar { color: #2a1a10; }
+.app.glossy .brand-mark {
+  background: linear-gradient(145deg, #ff9a52, #f0601a);
+  border-color: rgb(255 255 255 / 0.6);
+  box-shadow: 0 4px 14px rgb(240 96 26 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.5);
+}
+.app.glossy .hero h1 { color: #2a160b; }
+.app.glossy .hero h1 span { color: #f26a1b; }
+.app.glossy .hero p { color: #7a6455; }
+
+/* Shared white frosted glass for all cards */
+.app.glossy .form-panel,
+.app.glossy .sidebar .panel {
+  background:
+    radial-gradient(ellipse 70% 50% at 100% 0%, rgb(255 176 120 / 0.14), transparent 70%),
+    linear-gradient(150deg, rgb(255 255 255 / 0.82) 0%, rgb(255 255 255 / 0.62) 55%, rgb(255 250 245 / 0.72) 100%);
+  border: 1px solid rgb(255 255 255 / 0.95);
+  -webkit-backdrop-filter: blur(26px) saturate(140%);
+  backdrop-filter: blur(26px) saturate(140%);
+  box-shadow:
+    0 0 0 1px rgb(170 100 50 / 0.08),
+    0 22px 50px rgb(180 90 30 / 0.12),
+    0 4px 12px rgb(180 90 30 / 0.06),
+    inset 0 1px 0 #ffffff,
+    inset 0 0 22px rgb(255 255 255 / 0.4);
+}
+.app.glossy .sidebar .panel:hover {
+  box-shadow:
+    0 0 0 1px rgb(170 100 50 / 0.1),
+    0 26px 56px rgb(180 90 30 / 0.16),
+    0 4px 12px rgb(180 90 30 / 0.08),
+    inset 0 1px 0 #ffffff,
+    inset 0 0 22px rgb(255 255 255 / 0.45);
+}
+/* Shine line along the top: a warm peach glint (white would vanish on white glass) */
+.app.glossy .form-panel::before {
+  background: linear-gradient(90deg, transparent, rgb(255 170 110 / 0.95), transparent);
+  box-shadow: 0 0 10px rgb(255 150 80 / 0.5);
+}
+.app.glossy .sidebar .panel::before {
+  background: linear-gradient(90deg, transparent, rgb(255 170 110 / 0.8), transparent);
+  box-shadow: 0 0 8px rgb(255 150 80 / 0.35);
+}
+.app.glossy .form-panel::after { background: rgb(255 190 140 / 0.3); }
+/* Corner sparkle in orange so it shows on white */
+.app.glossy .sidebar .panel::after {
+  background: #ff9a52;
+  filter: drop-shadow(0 0 6px rgb(255 140 60 / 0.8));
+}
+
+/* Form text */
+.app.glossy .form-panel .panel-title { color: #2a160b; }
+.app.glossy .form-panel .panel-meta,
+.app.glossy .form-panel .char-count,
+.app.glossy .form-panel .fine-print,
+.app.glossy .form-panel .hint { color: #a08a7a; font-weight: 500; }
+.app.glossy .form-panel .req { color: #f26a1b; }
+.app.glossy .form-panel .group legend { color: #b07a58; }
+.app.glossy .form-panel .field label { color: #2a1a10; }
+.app.glossy .form-panel .opt { color: #a08a7a; }
+.app.glossy .form-panel .error { color: #d9363e; }
+
+/* Inputs */
+.app.glossy .control input,
+.app.glossy .control textarea {
+  color: #2a1a10;
+  box-shadow: 0 1px 2px rgb(170 100 50 / 0.06), inset 0 1px 0 #ffffff;
+}
+.app.glossy .control input::placeholder,
+.app.glossy .control textarea::placeholder { color: #b8a294; }
+.app.glossy .control-icon { color: #f07a2e; }
+.app.glossy .control:focus-within .control-icon { color: #e05f12; }
+.app.glossy .control input:focus,
+.app.glossy .control textarea:focus {
+  border-color: var(--field-focus);
+  box-shadow: 0 0 0 4px rgb(255 138 61 / 0.18);
+}
+.app.glossy .control input[readonly] { background: #fff8f2; color: #7a6455; }
+.app.glossy .has-error .control input,
+.app.glossy .has-error .control textarea { border-color: #ef8a92; }
+.app.glossy .has-error .control input:focus,
+.app.glossy .has-error .control textarea:focus { border-color: #e5484d; box-shadow: 0 0 0 4px rgb(229 72 77 / 0.15); }
+.app.glossy .has-error .control-icon,
+.app.glossy .has-error .control:focus-within .control-icon { color: #e5484d; }
+.app.glossy .error-banner { background: #fdecef; color: #c42b3a; }
+/* Keep autofilled fields white instead of the browser's yellow */
+.app.glossy .control input:-webkit-autofill {
+  -webkit-text-fill-color: #2a1a10;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+}
+
+/* Main button: keep the glossy orange, with a softer warm shadow */
+.app.glossy .btn.primary {
+  box-shadow: 0 8px 20px rgb(240 96 26 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.5);
+}
+
+/* Secondary button and success screen */
+.app.glossy .btn.ghost { color: #2a1a10; background: #ffffff; border-color: #f0dccd; box-shadow: 0 1px 2px rgb(170 100 50 / 0.06); }
+.app.glossy .btn.ghost:hover { background: #fff8f2; }
+.app.glossy .success h2 { color: #2a160b; }
+.app.glossy .success p { color: #7a6455; }
+
+/* ---------- Success reward: coins burst out of the check, "+10%" rises ---------- */
+.success-badge-wrap { position: relative; width: 68px; margin: 56px auto 18px; }
+.success-badge-wrap .success-badge { margin: 0; }
+.success-burst { position: absolute; left: 50%; top: 50%; pointer-events: none; }
+.success-burst i {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff1bf, #f5b524 60%, #d48806);
+  box-shadow: 0 0 0 1px #e0a20b, 0 2px 6px rgb(217 140 7 / 0.35);
+  opacity: 0;
+  animation: success-coin 1.4s cubic-bezier(0.22, 1, 0.36, 1) var(--delay) both;
+}
+@keyframes success-coin {
+  0%   { opacity: 0; transform: rotate(var(--a)) translateY(0) scale(0.3); }
+  15%  { opacity: 1; }
+  60%  { opacity: 1; transform: rotate(var(--a)) translateY(calc(var(--d) * -1)) scale(1); }
+  100% { opacity: 0; transform: rotate(var(--a)) translateY(calc(var(--d) * -1 - 14px)) scale(0.7); }
+}
+.success-reward-pop {
+  position: absolute;
+  left: calc(100% - 4px);
+  top: -14px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: #fff;
+  background: linear-gradient(135deg, #ffb15c, #f26a1b);
+  box-shadow: 0 4px 12px rgb(240 96 26 / 0.35);
+  animation: success-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both;
+}
+@keyframes success-pop {
+  from { opacity: 0; translate: -6px 10px; scale: 0.5; }
+  to   { opacity: 1; translate: 0 0; scale: 1; }
+}
+.reward-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: #b8500f;
+  background: #fff4e6;
+  border: 1px solid #ffd9b8;
+  animation: success-pop 0.5s ease-out 0.9s both;
+}
+.reward-note strong { color: #e0560f; }
+@media (prefers-reduced-motion: reduce) {
+  .success-burst { display: none; }
+  .success-reward-pop, .reward-note { animation: none; }
+}
+
+/* Sidebar text */
+.app.glossy .sidebar .panel { color: #2a1a10; }
+.app.glossy .sidebar .panel-title,
+.app.glossy .step strong { color: #2a160b; }
+.app.glossy .step p,
+.app.glossy .empty p { color: #7a6455; }
+
+/* Timeline: soft tinted circles */
+.app.glossy .step-icon {
+  color: #f06a1e;
+  background: linear-gradient(145deg, #fff6ee, #ffe6d3);
+  border: 1px solid #ffd5b8;
+  box-shadow: 0 4px 12px rgb(240 106 30 / 0.14), inset 0 1px 0 #ffffff;
+}
+.app.glossy .step:nth-child(2) .step-icon {
+  color: #d98a07;
+  background: linear-gradient(145deg, #fffaf0, #fff0cc);
+  border-color: #ffe1a3;
+  box-shadow: 0 4px 12px rgb(217 138 7 / 0.14), inset 0 1px 0 #ffffff;
+}
+.app.glossy .step:nth-child(3) .step-icon {
+  /* Gold coin for the reward step */
+  color: #c58a00;
+  background: linear-gradient(145deg, #fffbe8, #ffefb0);
+  border-color: #fde08a;
+  box-shadow: 0 4px 12px rgb(217 160 7 / 0.16), inset 0 1px 0 #ffffff;
+}
+.app.glossy .step:not(:last-child)::after { background: linear-gradient(180deg, rgb(240 106 30 / 0.4), rgb(240 106 30 / 0.06)); }
+.app.glossy .step-num { color: #2a1a10; background: #ffffff; box-shadow: 0 1px 4px rgb(170 100 50 / 0.15); }
+
+/* Your referrals */
+.app.glossy .empty { color: #2a1a10; }
+.app.glossy .empty-icon { color: #f26a1b; }
+.app.glossy .count,
+.app.glossy .avatar.sm { background: #fff1e6; color: #e05f12; }
+.app.glossy .recent-item { border-color: rgb(120 70 30 / 0.08); }
+.app.glossy .recent-text span { color: #a08a7a; }
+.app.glossy .status-pill { background: #fff4dd; color: #b45309; }
+
+/* ==========================================================================
+   PLAYFUL SIDEBAR ANIMATIONS
+   Entrances run once on load ("backwards" fill so the card's hover lift still
+   works afterwards). Looping motion uses the separate translate / scale /
+   rotate properties so the gentle bob and the hover pop can combine.
+   ========================================================================== */
+
+/* Cards slide up and fade in, one after the other */
+.app.glossy .sidebar .panel { animation: side-card-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.app.glossy .sidebar .panel:nth-child(1) { animation-delay: 0.15s; }
+.app.glossy .sidebar .panel:nth-child(2) { animation-delay: 0.3s; }
+@keyframes side-card-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+}
+
+/* Steps pop in one by one */
+.app.glossy .step { animation: step-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+.app.glossy .step:nth-child(1) { animation-delay: 0.45s; }
+.app.glossy .step:nth-child(2) { animation-delay: 0.65s; }
+.app.glossy .step:nth-child(3) { animation-delay: 0.85s; }
+@keyframes step-in {
+  from { opacity: 0; transform: translateX(-12px) scale(0.96); }
+}
+
+/* Timeline line draws itself down between the icons */
+.app.glossy .step:not(:last-child)::after {
+  transform-origin: top;
+  animation: line-draw 0.5s ease-out backwards;
+}
+.app.glossy .step:nth-child(1)::after { animation-delay: 0.85s; }
+.app.glossy .step:nth-child(2)::after { animation-delay: 1.05s; }
+@keyframes line-draw {
+  from { transform: scaleY(0); }
+}
+
+/* Step icons bob gently, slightly out of step with each other */
+.app.glossy .step-icon {
+  animation: icon-bob 3.2s ease-in-out infinite;
+  transition: scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), rotate 0.35s ease, box-shadow 0.3s ease;
+}
+.app.glossy .step:nth-child(2) .step-icon { animation-delay: -1.1s; }
+.app.glossy .step:nth-child(3) .step-icon { animation-delay: -2.2s; }
+@keyframes icon-bob {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -3px; }
+}
+/* Hovering a step: icon pops with a little wiggle, text nudges right */
+.app.glossy .step > div { transition: translate 0.3s ease; }
+.app.glossy .step:hover > div { translate: 4px 0; }
+.app.glossy .step:hover .step-icon {
+  scale: 1.12;
+  animation: icon-bob 3.2s ease-in-out infinite, icon-wiggle 0.5s ease;
+  box-shadow: 0 0 22px rgb(255 122 46 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.12);
+}
+.app.glossy .step:nth-child(3):hover .step-icon { box-shadow: 0 0 22px rgb(245 180 20 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.12); }
+@keyframes icon-wiggle {
+  0%, 100% { rotate: 0deg; }
+  25%      { rotate: -10deg; }
+  60%      { rotate: 8deg; }
+}
+.app.glossy .step-num { transition: background 0.3s ease, color 0.3s ease; }
+.app.glossy .step:hover .step-num { background: #ff7a2e; color: #ffffff; }
+
+/* Corner sparkle twinkles */
+.app.glossy .sidebar .panel::after { animation: sparkle-twinkle 2.8s ease-in-out infinite; }
+.app.glossy .sidebar .recent::after { animation-delay: -1.4s; }
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.55; scale: 0.8;  rotate: 0deg; }
+  50%      { opacity: 1;    scale: 1.15; rotate: 45deg; }
+}
+
+/* "Your referrals" icon floats with a soft orange pulse around it */
+.app.glossy .empty-icon {
+  border-radius: 50%;
+  animation: empty-float 3.6s ease-in-out infinite, empty-pulse 2.4s ease-out infinite;
+  transition: scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.app.glossy .empty-icon:hover { scale: 1.12; animation: empty-float 3.6s ease-in-out infinite, empty-pulse 2.4s ease-out infinite, empty-hop 0.5s ease; }
+@keyframes empty-float {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -5px; }
+}
+@keyframes empty-pulse {
+  0%   { box-shadow: 0 0 0 0 rgb(255 122 46 / 0.35); }
+  80%  { box-shadow: 0 0 0 14px rgb(255 122 46 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(255 122 46 / 0); }
+}
+@keyframes empty-hop {
+  40% { rotate: -8deg; }
+  70% { rotate: 6deg; }
+}
+
+/* Reduced motion: everything stays still */
+@media (prefers-reduced-motion: reduce) {
+  .app.glossy .sidebar .panel,
+  .app.glossy .step,
+  .app.glossy .step:not(:last-child)::after,
+  .app.glossy .step-icon,
+  .app.glossy .step:hover .step-icon,
+  .app.glossy .sidebar .panel::after,
+  .app.glossy .empty-icon,
+  .app.glossy .empty-icon:hover { animation: none; }
+  .app.glossy .step:hover > div { translate: none; }
+}
+
+/* ---------- "Your referrals" reward teaser ---------- */
+.app.glossy .reward-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #b8500f;
+  background: #fff4e6;
+  border: 1px solid #ffd9b8;
+}
+.app.glossy .chip-coin {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffe8ad, #f5a524 60%, #d97706);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.45);
+  animation: coin-flip 2.4s ease-in-out infinite;
+}
+@keyframes coin-flip {
+  0%, 60%, 100% { scale: 1 1; }
+  80%           { scale: 0.15 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app.glossy .chip-coin { animation: none; }
+}
+
+/* ==========================================================================
+   STEP-BY-STEP JOURNEY LOOP ("How it works")
+   One smooth 9s loop: step 1 lights up -> the line fills to step 2 -> step 2
+   lights up -> the line fills to step 3 -> the coin flips and a reward burst
+   (coins + "+10%") plays -> everything eases back and it starts again.
+   Steps stay lit once reached, so it reads as progress.
+   ========================================================================== */
+.app.glossy .step:nth-child(3) .step-icon { --glow: 217 160 7; }
+
+/* Step text: resting dim, full strength once its step is reached */
+.app.glossy .step > div { opacity: 0.45; animation: 9s ease-in-out infinite; }
+.app.glossy .step:nth-child(1) > div { animation-name: reach-1; }
+.app.glossy .step:nth-child(2) > div { animation-name: reach-2; }
+.app.glossy .step:nth-child(3) > div { animation-name: reach-3; }
+@keyframes reach-1 { 0%, 3% { opacity: 0.45; } 9%, 91% { opacity: 1; } 98%, 100% { opacity: 0.45; } }
+@keyframes reach-2 { 0%, 33% { opacity: 0.45; } 39%, 91% { opacity: 1; } 98%, 100% { opacity: 0.45; } }
+@keyframes reach-3 { 0%, 63% { opacity: 0.45; } 69%, 91% { opacity: 1; } 98%, 100% { opacity: 0.45; } }
+
+/* Step icon: a soft glow ring while it's the current step (bob keeps running) */
+.app.glossy .step:nth-child(1) .step-icon { animation: icon-bob 3.2s ease-in-out infinite, glow-1 9s ease-in-out infinite; }
+.app.glossy .step:nth-child(2) .step-icon { animation: icon-bob 3.2s ease-in-out -1.1s infinite, glow-2 9s ease-in-out infinite; }
+.app.glossy .step:nth-child(3) .step-icon { animation: icon-bob 3.2s ease-in-out -2.2s infinite, glow-3 9s ease-in-out infinite; }
+@keyframes glow-1 {
+  0%, 3%, 36%, 100% { box-shadow: 0 4px 12px rgb(var(--glow) / 0.14), inset 0 1px 0 #ffffff; }
+  9%, 30%           { box-shadow: 0 0 0 5px rgb(var(--glow) / 0.16), 0 0 22px rgb(var(--glow) / 0.4), inset 0 1px 0 #ffffff; }
+}
+@keyframes glow-2 {
+  0%, 33%, 66%, 100% { box-shadow: 0 4px 12px rgb(var(--glow) / 0.14), inset 0 1px 0 #ffffff; }
+  39%, 60%           { box-shadow: 0 0 0 5px rgb(var(--glow) / 0.16), 0 0 22px rgb(var(--glow) / 0.4), inset 0 1px 0 #ffffff; }
+}
+@keyframes glow-3 {
+  0%, 63%, 96%, 100% { box-shadow: 0 4px 12px rgb(var(--glow) / 0.14), inset 0 1px 0 #ffffff; }
+  69%, 90%           { box-shadow: 0 0 0 6px rgb(var(--glow) / 0.2), 0 0 26px rgb(var(--glow) / 0.5), inset 0 1px 0 #ffffff; }
+}
+
+/* Timeline: a faint track that fills with orange from top to bottom */
+.app.glossy .step:not(:last-child)::after {
+  transform: none;
+  background-color: rgb(240 106 30 / 0.14);
+  background-image: linear-gradient(180deg, #ff9a52, #f26a1b);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100% 0%;
+}
+.app.glossy .step:nth-child(1)::after { animation: fill-1 9s ease-in-out infinite; }
+.app.glossy .step:nth-child(2)::after { animation: fill-2 9s ease-in-out infinite; }
+@keyframes fill-1 {
+  0%, 22%  { background-size: 100% 0%; opacity: 1; }
+  34%, 92% { background-size: 100% 100%; opacity: 1; }
+  98%      { background-size: 100% 100%; opacity: 0; }
+  99%, 100% { background-size: 100% 0%; opacity: 1; }
+}
+@keyframes fill-2 {
+  0%, 52%  { background-size: 100% 0%; opacity: 1; }
+  64%, 92% { background-size: 100% 100%; opacity: 1; }
+  98%      { background-size: 100% 100%; opacity: 0; }
+  99%, 100% { background-size: 100% 0%; opacity: 1; }
+}
+
+/* ---------- Reward: the coin flips and a burst plays ---------- */
+.app.glossy .step:nth-child(3) .step-icon { position: relative; }
+.app.glossy .step:nth-child(3) .step-icon svg { animation: coin-icon-flip 9s ease-in-out infinite; }
+@keyframes coin-icon-flip {
+  0%, 64%   { scale: 1 1; }
+  67%       { scale: 0.08 1; }
+  70%       { scale: 1 1; }
+  73%       { scale: 0.08 1; }
+  76%, 100% { scale: 1 1; }
+}
+/* Three small coins pop up and float out of the icon */
+.app.glossy .coin-burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+}
+.app.glossy .coin-burst i {
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff1bf, #f5b524 60%, #d48806);
+  box-shadow: 0 0 0 1px #e0a20b, 0 2px 6px rgb(217 140 7 / 0.35);
+  opacity: 0;
+  animation: coin-pop 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.app.glossy .coin-burst i:nth-child(1) { --dx: -22px; --dy: -30px; }
+.app.glossy .coin-burst i:nth-child(2) { --dx: 2px;   --dy: -42px; animation-delay: 0.15s; }
+.app.glossy .coin-burst i:nth-child(3) { --dx: 24px;  --dy: -30px; animation-delay: 0.3s; }
+@keyframes coin-pop {
+  0%, 68%   { opacity: 0; translate: 0 0; scale: 0.4; }
+  71%       { opacity: 1; scale: 1; }
+  80%       { opacity: 1; translate: var(--dx) var(--dy); scale: 1; }
+  87%       { opacity: 0; translate: var(--dx) calc(var(--dy) - 8px); scale: 0.8; }
+  100%      { opacity: 0; translate: 0 0; scale: 0.4; }
+}
+/* "+10%" tag rises beside the coin */
+.app.glossy .reward-pop {
+  position: absolute;
+  left: calc(100% - 6px);
+  top: -20px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ffb15c, #f26a1b);
+  box-shadow: 0 3px 10px rgb(240 96 26 / 0.35);
+  opacity: 0;
+  pointer-events: none;
+  animation: reward-rise 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+@keyframes reward-rise {
+  0%, 70%  { opacity: 0; translate: -4px 6px; scale: 0.7; }
+  75%      { opacity: 1; translate: 0 -2px; scale: 1.05; }
+  78%, 88% { opacity: 1; translate: 0 -6px; scale: 1; }
+  94%, 100% { opacity: 0; translate: 0 -10px; scale: 1; }
+}
+
+/* ---------- Step 1 pencil: writes while step 1 is current (8%–29% of the loop) ---------- */
+.app.glossy .step:nth-child(1) .step-icon svg {
+  transform-origin: 30% 70%;
+  animation: pencil-write 9s ease-in-out infinite;
+}
+@keyframes pencil-write {
+  0%, 8%    { translate: 0 0;      rotate: 0deg; }
+  11%       { translate: -2px 1px; rotate: -10deg; }
+  14%       { translate: 2px -1px; rotate: 4deg; }
+  17%       { translate: -1px 1px; rotate: -10deg; }
+  20%       { translate: 3px 0;    rotate: 4deg; }
+  23%       { translate: 0 1px;    rotate: -8deg; }
+  26%       { translate: 3px -1px; rotate: 2deg; }
+  29%, 100% { translate: 0 0;      rotate: 0deg; }
+}
+/* A little scribble line draws itself under the pencil, then fades */
+.app.glossy .step:nth-child(1) .step-icon::after {
+  content: '';
+  position: absolute;
+  left: 28%;
+  bottom: 22%;
+  width: 44%;
+  height: 2px;
+  border-radius: 2px;
+  background: #f06a1e;
+  transform-origin: left;
+  opacity: 0;
+  scale: 0 1;
+  animation: pencil-scribble 9s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes pencil-scribble {
+  0%, 8%    { opacity: 0.75; scale: 0 1; }
+  28%, 31%  { opacity: 0.75; scale: 1 1; }
+  36%       { opacity: 0;    scale: 1 1; }
+  37%, 100% { opacity: 0;    scale: 0 1; }
+}
+
+/* ---------- Step 2 phone: rings twice while step 2 is current (38%–55% of the loop) ---------- */
+.app.glossy .step:nth-child(2) .step-icon svg { animation: phone-shake 9s ease-in-out infinite; }
+@keyframes phone-shake {
+  0%, 38%   { rotate: 0deg; }
+  40% { rotate: -14deg; } 41% { rotate: 14deg; } 42% { rotate: -14deg; } 43% { rotate: 12deg; } 44% { rotate: -6deg; }
+  45%, 48%  { rotate: 0deg; }
+  50% { rotate: -14deg; } 51% { rotate: 14deg; } 52% { rotate: -14deg; } 53% { rotate: 12deg; } 54% { rotate: -6deg; }
+  55%, 100% { rotate: 0deg; }
+}
+/* An amber ripple spreads out with each ring */
+.app.glossy .step:nth-child(2) .step-icon::before,
+.app.glossy .step:nth-child(2) .step-icon::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 2px solid rgb(217 138 7 / 0.5);
+  opacity: 0;
+  pointer-events: none;
+  animation: 9s ease-out infinite;
+}
+.app.glossy .step:nth-child(2) .step-icon::before { animation-name: phone-ripple-1; }
+.app.glossy .step:nth-child(2) .step-icon::after  { animation-name: phone-ripple-2; }
+@keyframes phone-ripple-1 {
+  0%, 39%   { opacity: 0;   scale: 1; }
+  40%       { opacity: 0.9; scale: 1; }
+  47%       { opacity: 0;   scale: 1.7; }
+  48%, 100% { opacity: 0;   scale: 1; }
+}
+@keyframes phone-ripple-2 {
+  0%, 49%   { opacity: 0;   scale: 1; }
+  50%       { opacity: 0.9; scale: 1; }
+  57%       { opacity: 0;   scale: 1.7; }
+  58%, 100% { opacity: 0;   scale: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app.glossy .step:nth-child(1) .step-icon svg,
+  .app.glossy .step:nth-child(2) .step-icon svg,
+  .app.glossy .step:nth-child(1) .step-icon::after,
+  .app.glossy .step:nth-child(2) .step-icon::before,
+  .app.glossy .step:nth-child(2) .step-icon::after { animation: none; opacity: 0; }
+  .app.glossy .step:nth-child(1) .step-icon svg,
+  .app.glossy .step:nth-child(2) .step-icon svg { opacity: 1; }
+}
+
+/* Hovering a step still gives its icon the little wiggle */
+.app.glossy .steps .step:hover .step-icon { animation: icon-bob 3.2s ease-in-out infinite, icon-wiggle 0.5s ease; }
+
+/* Reduced motion: show every step reached, no movement */
+@media (prefers-reduced-motion: reduce) {
+  .app.glossy .step > div,
+  .app.glossy .step .step-icon,
+  .app.glossy .step:not(:last-child)::after,
+  .app.glossy .step:nth-child(3) .step-icon svg,
+  .app.glossy .coin-burst i,
+  .app.glossy .reward-pop { animation: none !important; }
+  .app.glossy .step > div { opacity: 1; }
+  .app.glossy .step:not(:last-child)::after { background-size: 100% 100%; }
+}
