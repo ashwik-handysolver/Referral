@@ -34,7 +34,7 @@ Each referral is emailed to **connect@handysolver.com** through [EmailJS](https:
 1. Sign up at emailjs.com.
 2. **Email Services → Add New Service** (e.g. Gmail) and connect the account that sends the emails. Copy the **Service ID**.
 3. **Email Templates → Create New Template**:
-   - **Subject:** `New referral: {{referred_name}} (from {{referrer_name}})`
+   - **Subject:** `New {{service}} referral: {{referred_name}} (from {{referrer_name}})`
    - **To Email:** `connect@handysolver.com` (change this to send referrals elsewhere)
    - **Reply To:** `{{reply_to}}`
    - **Content:** switch to the code editor and paste all of `email/referral-email.html`.

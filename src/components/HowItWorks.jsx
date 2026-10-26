@@ -19,7 +19,7 @@ export default function HowItWorks() {
                 // Reward burst for the glossy theme's step animation (decorative)
                 <>
                   <span className="coin-burst" aria-hidden="true"><i /><i /><i /></span>
-                  <span className="reward-pop" aria-hidden="true">+10%</span>
+                  <span className="reward-pop" aria-hidden="true">+5%</span>
                 </>
               )}
             </span>

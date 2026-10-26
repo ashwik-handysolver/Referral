@@ -8,6 +8,8 @@ import RecentReferrals from './components/RecentReferrals'
 import './App.css'
 import './glossy.css'
 
+const YEAR = new Date().getFullYear()
+
 export default function App() {
   const context = useMemo(() => getReferralContext(), [])
   const [recent, setRecent] = useState(() => loadRecent(context))
@@ -39,7 +41,13 @@ export default function App() {
         </div>
       </main>
 
-      {/* <footer className="footer">Referral details are shared only with our team.</footer> */}
+      <footer className="credit">
+        Made with
+        <svg className="credit-heart" viewBox="0 0 24 24" width="14" height="14" aria-label="love" role="img">
+          <path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.4.4.7 1.6.7 2 0 .7-1.3 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" />
+        </svg>
+        by <strong>Handysolver</strong> © {YEAR}
+      </footer>
     </div>
   )
 }

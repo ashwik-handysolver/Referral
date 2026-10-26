@@ -18,6 +18,7 @@ export async function submitReferral({ referred, referrer }) {
     referred_phone: referred.phone,
     referred_phone_link: referred.phone.replace(/[^\d+]/g, ''),
     referred_email: dash(referred.email),
+    service: dash(referred.service),
     notes: dash(referred.notes),
     referrer_name: dash(referrer.referrerName),
     referrer_email: dash(referrer.referrerEmail),

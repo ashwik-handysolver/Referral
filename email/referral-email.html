@@ -8,7 +8,7 @@
 <body style="margin:0;padding:0;background:#fff4ee;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#2b1407;">
   <!-- Preheader: the preview line shown in the inbox -->
   <div style="display:none;max-height:0;overflow:hidden;opacity:0;">
-    {{referrer_name}} referred {{referred_name}} ({{referred_phone}}). Give them a call.
+    {{referrer_name}} referred {{referred_name}} for {{service}} ({{referred_phone}}). Give them a call.
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fff4ee;padding:32px 12px;">
@@ -19,7 +19,7 @@
           <!-- Header -->
           <tr>
             <td style="background:#ec551a;background-image:linear-gradient(135deg,#c84013 0%,#ff7a2f 100%);padding:28px 32px;">
-              <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ffe2d1;">New referral</div>
+              <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ffe2d1;">New referral &middot; <span style="display:inline-block;padding:2px 10px;border-radius:999px;background:rgba(255,255,255,0.22);color:#ffffff;letter-spacing:1px;">{{service}}</span></div>
               <div style="font-size:24px;font-weight:700;color:#ffffff;margin-top:6px;line-height:1.3;">{{referred_name}}</div>
               <div style="font-size:14px;color:#ffe2d1;margin-top:4px;">Referred by {{referrer_name}} &middot; {{submitted_at}}</div>
             </td>
@@ -55,8 +55,12 @@
                   <td style="padding:14px 18px;border-bottom:1px solid #ffe0cf;font-size:14px;font-weight:600;"><a href="tel:{{referred_phone_link}}" style="color:#ee6017;text-decoration:none;">{{referred_phone}}</a></td>
                 </tr>
                 <tr>
-                  <td style="padding:14px 18px;font-size:13px;color:#96644a;">Email</td>
-                  <td style="padding:14px 18px;font-size:14px;font-weight:600;color:#2b1407;">{{referred_email}}</td>
+                  <td style="padding:14px 18px;border-bottom:1px solid #ffe0cf;font-size:13px;color:#96644a;">Email</td>
+                  <td style="padding:14px 18px;border-bottom:1px solid #ffe0cf;font-size:14px;font-weight:600;color:#2b1407;">{{referred_email}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 18px;font-size:13px;color:#96644a;">Interested in</td>
+                  <td style="padding:14px 18px;font-size:14px;font-weight:700;color:#ee6017;">{{service}}</td>
                 </tr>
               </table>
             </td>

@@ -23,7 +23,7 @@ export default function RecentReferrals({ items }) {
           <span className="empty-icon"><UsersIcon size={22} /></span>
           <p>No referrals yet. People you refer will show up here.</p>
           {/* Reward teaser: glossy theme only (hidden on the normal page in App.css) */}
-          <span className="reward-chip"><span className="chip-coin" aria-hidden="true" />Earn 10% for every referral that converts</span>
+          <span className="reward-chip"><span className="chip-coin" aria-hidden="true" />Earn 5% for every referral that converts</span>
         </div>
       ) : (
         <ul className="recent-list">
